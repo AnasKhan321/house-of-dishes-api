@@ -12,6 +12,7 @@ urlpatterns = [
     path('dish/filter/<str:course_slug>/course' ,DishListCourse.as_view() , name="dish_list_course" ),
     path('dish/filter/<str:choice_slug>/choice' ,DishChoice.as_view() , name="dish_list_choice" ),
     path('dish/filter/<int:dish_id>/byid' ,DishById.as_view() , name="dish_by_id" ),
-    path('dish/byIngredients' , DishByIngredients.as_view() ,name="Dish-Ingredients")
+    path('dish/byIngredients' , DishByIngredients.as_view() ,name="Dish-Ingredients"),
+    path('dish/filter/search' , DishFilter.as_view() , name="search-dish")
 
 ]

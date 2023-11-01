@@ -184,3 +184,17 @@ class DishByIngredients(APIView):
             return Response(serializer.data)
         except Exception as error :
             return  Response({"error" : error})
+
+
+class DishFilter(APIView):
+    permission_classes = []
+    serializer_class = DishSerializer
+
+    def post(self, request):
+        try:
+            filters = request.data
+            dishes = Dish.objects.filter(name=filters['name'] , veg_non_veg=filters['veg_non_veg'] , main_course_starter_dessert=filters['course_choice'])
+            serializer = DishSerializer(dishes, many=True)
+            return  Response({"success" : True , "data" : serializer.data})
+        except Exception as j:
+            return  Response({"success" : False , "error" : j})

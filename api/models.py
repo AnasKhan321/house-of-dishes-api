@@ -36,7 +36,6 @@ class Dish(models.Model):
         ('Dessert', 'Dessert'),
     )
     main_course_starter_dessert = models.CharField(max_length=12, choices=COURSE_CHOICES, default='MainCourse')
-    customizable_ingredients = models.BooleanField(default=False)
     cooking_time = models.IntegerField(blank=True)
     dish_picture = models.ImageField(upload_to="dish_images/", blank=True, null=True)
 

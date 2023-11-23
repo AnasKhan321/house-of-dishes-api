@@ -107,7 +107,6 @@ class GraphicListCreateView(generics.ListCreateAPIView):
 
 class GraphicLoginView(APIView):
     permission_classes = []
-
     def post(self, request, *args, **kwargs):
         serializer = GraphicLoginSerializer(data=request.data)
         if serializer.is_valid():

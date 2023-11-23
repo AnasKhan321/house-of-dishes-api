@@ -21,13 +21,19 @@ class Ingredient(models.Model):
         return f"Name: {self.name} Quantity: {self.quantity}"
 
 
+class Course(models.Model):
+    name = models.CharField(max_length=500, blank=True)
+    dish = models.ForeignKey('Dish', on_delete=models.CASCADE, related_name='courses')
+
+    def __str__(self) -> str:
+        return f"{self.name}"
+
 class Dish(models.Model):
     name = models.CharField(max_length=100)
     chef = models.ForeignKey(ChefUser, on_delete=models.CASCADE, related_name='dish_set')
     veg_non_veg = models.CharField(max_length=7, blank=False, default=None)
     popularity_state = models.CharField(max_length=100, blank=True)
     cuisine = models.CharField(max_length=100, blank=True, default=None)
-    course_type = models.CharField(max_length=12, blank=False, default=None)
     cooking_time = models.CharField(blank=True, default=None, max_length=10)
     kitchen_equipments = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=500, blank=True, null=True)

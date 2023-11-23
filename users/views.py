@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.core.mail import send_mail
 from django.conf import settings
-
+from datetime import timedelta
 
 class RedirectSocial(View):
     def get(self, request, *args, **kwargs):
@@ -27,6 +27,7 @@ class ChefListCreateView(generics.ListCreateAPIView):
         if serializer.is_valid():
             chef = serializer.save()
             refresh = RefreshToken.for_user(chef)
+            refresh.access_token.set_exp(lifetime=timedelta(hours=3))
             access = str(refresh.access_token)
             data = {
                 "account_id": chef.id,
@@ -55,6 +56,7 @@ class ChefLoginView(APIView):
         if serializer.is_valid():
             user = serializer.validated_data['user']
             refresh = RefreshToken.for_user(user)
+            refresh.access_token.set_exp(lifetime=timedelta(hours=3))
             access_token = str(refresh.access_token)
             data = {
                 "account_id": user.id,
@@ -91,7 +93,7 @@ class GraphicListCreateView(generics.ListCreateAPIView):
             Graphic = serializer.save()
             refresh = RefreshToken.for_user(Graphic)
             access = str(refresh.access_token)
-            print(Graphic)
+            refresh.access_token.set_exp(lifetime=timedelta(hours=3))
             data = {
                 "account_id": Graphic.id,
                 "email": Graphic.email,
@@ -112,6 +114,7 @@ class GraphicLoginView(APIView):
             user = serializer.validated_data['user']
             refresh = RefreshToken.for_user(user)
             access_token = str(refresh.access_token)
+            refresh.access_token.set_exp(lifetime=timedelta(hours=3))
             data = {
                 "account_id": user.id,
                 "email": user.email,

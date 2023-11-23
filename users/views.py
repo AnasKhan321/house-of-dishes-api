@@ -126,13 +126,11 @@ class GraphicLoginView(APIView):
 
         return Response({"message": "Unable to login with given credentials."}, status=status.HTTP_401_UNAUTHORIZED)
 
-
 def send_email(email):
     subject = f'Your account email verification'
     message = f'To login into ai chef master dashboard follow this link http://dashboard.aichefmaster.com//login/{email}'
     email_from = settings.EMAIL_HOST_USER
     send_mail(subject, message, email_from, [email])
-
 
 class VerifyEmail(APIView):
     permission_classes = []

@@ -134,7 +134,6 @@ def send_email(email):
 
 class VerifyEmail(APIView):
     permission_classes = []
-
     def post(self, request):
         try:
             if 'email' in request.data:

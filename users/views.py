@@ -144,3 +144,6 @@ class VerifyEmail(APIView):
 
         except Exception as error:
             return Response({'success': False, 'message': error})
+
+
+
